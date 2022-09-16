@@ -8,5 +8,40 @@
         <script src="./index.js" defer></script>
         <title>Library</title>
     </head>
-    <body></body>
+    <body>
+        <div class="container">
+            <fieldset class="add-book">
+                <legend>Add your book to the library!</legend>
+
+                <form action="javascript:void(0);" method="post">
+                    <label for="book-name">
+                        Book name:
+                        <input type="text" name="name" id="book-name" />
+                    </label>
+                    <label for="book-start-date">
+                        Book start date:
+                        <input
+                            type="date"
+                            name="startDate"
+                            id="book-start-date"
+                        />
+                    </label>
+                    <label for="book-end-date">
+                        Book end date:
+                        <input type="date" name="endDate" id="book-end-date" />
+                    </label>
+                    <label for="book-status">
+                        Have you read your book already?
+                        <input
+                            type="checkbox"
+                            name="hasRead"
+                            id="book-status"
+                        />
+                    </label>
+                    <button type="submit">Add Book</button>
+                </form>
+            </fieldset>
+            <div class="library"></div>
+        </div>
+    </body>
 </html>
