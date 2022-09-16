@@ -1,7 +1,8 @@
 let myLibrary = [];
+let id = 0;
 
-const bookForm = document.getElementById('book-form');
-bookForm.addEventListener('submit', formSubmit)
+const bookFormElement = document.getElementById('book-form');
+bookFormElement.addEventListener('submit', formSubmit)
 
 
 function Book(book) {
@@ -11,12 +12,17 @@ function Book(book) {
 function formSubmit(e) {
     const book = {};
 
+    book.id = getId();
     book.name = e.target[0]?.form[0]?.value || '-';
     book.author = e.target[1]?.form[1]?.value || '-';
     book.pages = e.target[2]?.form[2]?.value || '-';
     book.isFinished = e.target[3]?.form[3]?.checked;
 
     addBookToLibrary(book);
+}
+
+function getId() {
+    return id++;
 }
 
 function addBookToLibrary(book) {
@@ -49,23 +55,46 @@ function updateBookDisplay() {
 function addCard() {
     const libraryDisplay = document.getElementById('library');
     const bookCard = document.createElement('div');
+    const currentBook = myLibrary[myLibrary.length - 1];
 
+    bookCard.dataset.number = currentBook['id'];
+
+    console.log(currentBook['id']);
 
     bookCard.append(createCardElement('name'));
     bookCard.append(createCardElement('author'));
     bookCard.append(createCardElement('pages'));
     bookCard.append(createCardElement('isFinished'));
 
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.addEventListener('pointerup', cardDelete);
+
+    bookCard.append(deleteButton);
+
     libraryDisplay.append(bookCard);
 }
 
 function createCardElement(key) {
-    const book = myLibrary[myLibrary.length - 1];
-
+    const currentBook = myLibrary[myLibrary.length - 1];
 
     const cardElement = document.createElement('p');
-    cardElement.textContent = book[key];
+    cardElement.textContent = currentBook[key];
     cardElement.classList.add(`card-${key}`);
 
     return cardElement;
+}
+
+function cardDelete(e) {
+
+    const index = myLibrary.findIndex(obj => {
+        return obj.id === parseInt(e.target.parentElement.dataset.number);
+    });
+
+    if (index <= -1) return
+    myLibrary.splice(index, 1);
+    e.target.parentElement.remove();
+
+    console.log(myLibrary);
 }

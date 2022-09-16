@@ -50,3 +50,13 @@
     background-color: darkslategray;
     padding: 1rem;
 }
+
+#library button {
+    width: 100%;
+    height: 2rem;
+
+    background-image: url(./svg/delete.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
