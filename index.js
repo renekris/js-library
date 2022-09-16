@@ -12,9 +12,9 @@ function formSubmit(e) {
     const book = {};
 
     book.name = e.target[0]?.form[0]?.value || '-';
-    book.startDate = e.target[1]?.form[1]?.value || '-';
-    book.endDate = e.target[2]?.form[2]?.value || '-';
-    book.hasRead = e.target[3]?.form[3]?.checked;
+    book.author = e.target[1]?.form[1]?.value || '-';
+    book.pages = e.target[2]?.form[2]?.value || '-';
+    book.isFinished = e.target[3]?.form[3]?.checked;
 
     addBookToLibrary(book);
 }
@@ -35,9 +35,9 @@ function updateBookDisplay() {
         const bookCard = document.createElement('div');
 
         bookCard.append(document.createElement('p').textContent = book.name);
-        bookCard.append(document.createElement('p').textContent = book.startDate);
-        bookCard.append(document.createElement('p').textContent = book.endDate);
-        bookCard.append(document.createElement('p').textContent = book.hasRead);
+        bookCard.append(document.createElement('p').textContent = book.author);
+        bookCard.append(document.createElement('p').textContent = book.pages);
+        bookCard.append(document.createElement('p').textContent = book.isFinished);
 
 
         libraryDisplay.append(bookCard);
@@ -48,28 +48,24 @@ function updateBookDisplay() {
 
 function addCard() {
     const libraryDisplay = document.getElementById('library');
-    const book = myLibrary[myLibrary.length - 1];
     const bookCard = document.createElement('div');
 
-    const cardName = document.createElement('h2');
-    cardName.textContent = book.name;
-    cardName.classList.add('card-name');
-    bookCard.append(cardName);
 
-    const cardStartDate = document.createElement('p');
-    cardStartDate.textContent = book.startDate;
-    cardStartDate.classList.add('card-start-date');
-    bookCard.append(cardStartDate);
-
-    const cardEndDate = document.createElement('p');
-    cardEndDate.textContent = book.endDate;
-    cardEndDate.classList.add('card-end-date');
-    bookCard.append(cardEndDate);
-
-    const cardHasRead = document.createElement('p');
-    cardHasRead.textContent = book.startDate;
-    cardHasRead.classList.add('card-start-date');
-    bookCard.append(cardHasRead);
+    bookCard.append(createCardElement('name'));
+    bookCard.append(createCardElement('author'));
+    bookCard.append(createCardElement('pages'));
+    bookCard.append(createCardElement('isFinished'));
 
     libraryDisplay.append(bookCard);
+}
+
+function createCardElement(key) {
+    const book = myLibrary[myLibrary.length - 1];
+
+
+    const cardElement = document.createElement('p');
+    cardElement.textContent = book[key];
+    cardElement.classList.add(`card-${key}`);
+
+    return cardElement;
 }

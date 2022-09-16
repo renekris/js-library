@@ -15,7 +15,7 @@
 
                 <form action="javascript:void(0);" method="post" id="book-form">
                     <label for="book-name">
-                        Book name:
+                        Book:
                         <input
                             type="text"
                             name="name"
@@ -23,37 +23,26 @@
                             value="testing"
                         />
                     </label>
-                    <label for="book-start-date">
-                        Book start date:
-                        <input
-                            type="date"
-                            name="startDate"
-                            id="book-start-date"
-                        />
+                    <label for="book-author">
+                        Author:
+                        <input type="text" name="author" id="book-author" />
                     </label>
-                    <label for="book-end-date">
-                        Book end date:
-                        <input type="date" name="endDate" id="book-end-date" />
+                    <label for="book-pages">
+                        Pages:
+                        <input type="number" name="pages" id="book-pages" />
                     </label>
                     <label for="book-status">
-                        Have you read your book already?
                         <input
                             type="checkbox"
-                            name="hasRead"
+                            name="isFinished"
                             id="book-status"
                         />
+                        Finished?
                     </label>
                     <button type="submit">Add Book</button>
                 </form>
             </fieldset>
-            <div id="library">
-                <div>
-                    <h2 class="card-name">testing</h2>
-                    <p class="card-start-date">-</p>
-                    <p class="card-end-date">-</p>
-                    <p class="card-start-date">-</p>
-                </div>
-            </div>
+            <div id="library"></div>
         </div>
     </body>
 </html>

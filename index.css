@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: slategrey;
 }
 
 /* Book form */
@@ -31,13 +32,21 @@
 }
 
 .add-book label {
-    margin: 2%;
+    margin: 0.25rem;
 }
 
 /* Library */
 
-.library {
+#library {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    color: white;
     width: 80%;
-    height: 100%;
-    background-color: beige;
+}
+
+#library div {
+    background-color: darkslategray;
+    padding: 1rem;
 }
