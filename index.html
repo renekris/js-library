@@ -16,7 +16,12 @@
                 <form action="javascript:void(0);" method="post" id="book-form">
                     <label for="book-name">
                         Book name:
-                        <input type="text" name="name" id="book-name" />
+                        <input
+                            type="text"
+                            name="name"
+                            id="book-name"
+                            value="testing"
+                        />
                     </label>
                     <label for="book-start-date">
                         Book start date:
@@ -41,7 +46,14 @@
                     <button type="submit">Add Book</button>
                 </form>
             </fieldset>
-            <div class="library"></div>
+            <div id="library">
+                <div>
+                    <h2 class="card-name">testing</h2>
+                    <p class="card-start-date">-</p>
+                    <p class="card-end-date">-</p>
+                    <p class="card-start-date">-</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
