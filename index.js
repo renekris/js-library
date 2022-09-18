@@ -67,11 +67,8 @@ function addCard() {
     bookCard.append(createCardElement('isFinished'));
 
 
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-button');
-    deleteButton.addEventListener('pointerup', cardDelete);
-
-    bookCard.append(deleteButton);
+    bookCard.append(createCardDelete());
+    bookCard.append(createCardSettings());
 
     libraryDisplay.append(bookCard);
 }
@@ -84,6 +81,21 @@ function createCardElement(key) {
     cardElement.classList.add(`card-${key}`);
 
     return cardElement;
+}
+
+function createCardSettings() {
+    const settingsButton = document.createElement('button');
+    settingsButton.classList.add('settings-button');
+
+    return settingsButton;
+}
+
+function createCardDelete() {
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.addEventListener('pointerup', cardDelete);
+
+    return deleteButton;
 }
 
 function cardDelete(e) {
