@@ -4,6 +4,11 @@ let id = 0;
 const bookFormElement = document.getElementById('book-form');
 bookFormElement.addEventListener('submit', formSubmit)
 
+// close modal if target != modal content
+document.addEventListener('pointerup', function (e) {
+    const modal = document.getElementById('modal');
+    if (e.target == modal) modal.style.display = "none";
+})
 
 function Book(book) {
     Object.assign(this, book);
@@ -86,8 +91,14 @@ function createCardElement(key) {
 function createCardSettings() {
     const settingsButton = document.createElement('button');
     settingsButton.classList.add('settings-button');
+    settingsButton.addEventListener('pointerup', settingsModal)
 
     return settingsButton;
+}
+
+function settingsModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex';
 }
 
 function createCardDelete() {
@@ -99,7 +110,6 @@ function createCardDelete() {
 }
 
 function cardDelete(e) {
-
     const index = myLibrary.findIndex(obj => {
         return obj.id === parseInt(e.target.parentElement.dataset.number);
     });

@@ -9,6 +9,50 @@
         <title>Library</title>
     </head>
     <body>
+        <div id="modal">
+            <div class="settings-modal-content">
+                <fieldset class="update-book">
+                    <legend>Change</legend>
+
+                    <form action="javascript:void(0);" method="post" id="update-form">
+                        <label for="update-name">
+                            Book:
+                            <input
+                                type="text"
+                                name="name"
+                                id="update-name"
+                            />
+                        </label>
+                        <label for="update-author">
+                            Author:
+                            <input
+                                type="text"
+                                name="author"
+                                id="update-author"
+                            />
+                        </label>
+                        <label for="update-pages">
+                            Pages:
+                            <input
+                                type="number"
+                                name="pages"
+                                id="update-pages"
+                            />
+                        </label>
+                        <label for="update-status">
+                            <input
+                                type="checkbox"
+                                name="isFinished"
+                                id="update-status"
+                            />
+                            Currently reading?
+                        </label>
+                        <button type="submit">Update Book</button>
+                    </form>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
         <div class="container">
             <fieldset class="add-book">
                 <legend>Add your book to the library!</legend>
@@ -20,7 +64,7 @@
                             type="text"
                             name="name"
                             id="book-name"
-                            value="Harry Potter and the Philosopher's Stone J. K. Rowling"
+                            value="Harry Potter and the Philosopher's Stone"
                         />
                     </label>
                     <label for="book-author">
@@ -47,7 +91,7 @@
                             name="isFinished"
                             id="book-status"
                         />
-                        Finished?
+                        Currently reading?
                     </label>
                     <button type="submit">Add Book</button>
                 </form>
