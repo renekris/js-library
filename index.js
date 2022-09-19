@@ -54,14 +54,15 @@ function updateLibraryDisplay() {
     myLibrary.forEach(element => {
         const bookCard = document.createElement('div');
         bookCard.dataset.uuid = element.id;
+        if (element.isFinished) bookCard.classList.add('finished');
 
-        bookCard.append(createCardElement(element, 'name'));
-        bookCard.append(createCardElement(element, 'author'));
-        bookCard.append(createCardElement(element, 'pages'));
-        bookCard.append(createCardElement(element, 'isFinished'));
+        bookCard.append(createCardElement(element, 'name', 'Name:'));
+        bookCard.append(createCardElement(element, 'author', 'Author:'));
+        bookCard.append(createCardElement(element, 'pages', 'Pages:'));
+        // bookCard.append(createCardElement(element, 'isFinished'));
 
-        bookCard.append(createCardDelete());
         bookCard.append(createCardSettings());
+        bookCard.append(createCardDelete());
 
         cardLibrary.append(bookCard);
     });
@@ -73,24 +74,25 @@ function addCard() {
     const currentCard = myLibrary[myLibrary.length - 1];
 
     bookCard.dataset.uuid = currentCard.id;
+    if (currentCard.isFinished) bookCard.classList.add('finished');
 
     console.log(currentCard.id);
 
-    bookCard.append(createCardElement(currentCard, 'name'));
-    bookCard.append(createCardElement(currentCard, 'author'));
-    bookCard.append(createCardElement(currentCard, 'pages'));
-    bookCard.append(createCardElement(currentCard, 'isFinished'));
+    bookCard.append(createCardElement(currentCard, 'name', 'Name:'));
+    bookCard.append(createCardElement(currentCard, 'author', 'Author:'));
+    bookCard.append(createCardElement(currentCard, 'pages', 'Pages:'));
+    // bookCard.append(createCardElement(currentCard, 'isFinished'));
 
 
-    bookCard.append(createCardDelete());
     bookCard.append(createCardSettings());
+    bookCard.append(createCardDelete());
 
     cardLibrary.append(bookCard);
 }
 
-function createCardElement(currentCard, key) {
+function createCardElement(currentCard, key, comment) {
     const cardElement = document.createElement('p');
-    cardElement.textContent = currentCard[key];
+    cardElement.textContent = `${comment} ${currentCard[key]}`;
     cardElement.classList.add(`card-${key}`);
 
     return cardElement;
