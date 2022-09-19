@@ -6,15 +6,40 @@ bookFormElement.addEventListener('submit', formSubmit);
 const updateFormElement = document.getElementById('update-form');
 updateFormElement.addEventListener('submit', updateSubmit)
 
+retrieveMyLibraryFromStorage();
+
 // close modal if target != modal content
-document.addEventListener('pointerdown', function (e) {
+document.addEventListener('pointerdown', hideModal)
+
+// local storage
+function saveMyLibraryToStorage() {
+    if (typeof (Storage) === 'undefined') return
+
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function retrieveMyLibraryFromStorage() {
+    if (typeof (Storage) === 'undefined') return
+
+    if (localStorage.getItem('myLibrary') !== null) {
+        myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+        updateLibraryDisplay();
+    }
+}
+
+function hideModal(e) {
     const modal = document.getElementById('modal');
     const modalFieldset = document.getElementById('update-book');
-    if (e.target == modal) {
+    try {
+        if (e.target === modal) {
+            modal.classList.remove('displayed');
+            modalFieldset.classList.remove('displayed');
+        }
+    } catch (err) {
         modal.classList.remove('displayed');
         modalFieldset.classList.remove('displayed');
     }
-})
+}
 
 function updateSubmit(e) {
     const currentIndex = myLibrary.findIndex(obj => obj.id === e.target[0].value);
@@ -25,7 +50,9 @@ function updateSubmit(e) {
     myLibrary[currentIndex].pages = e.target[3].value;
     myLibrary[currentIndex].isFinished = e.target[4].checked;
 
-    updateLibraryDisplay()
+    updateLibraryDisplay();
+    saveMyLibraryToStorage();
+    hideModal();
 }
 
 function Book(book) {
@@ -49,6 +76,7 @@ function formSubmit(e) {
 
     myLibrary.push(new Book(book));
     addCard();
+    saveMyLibraryToStorage();
 }
 
 function updateLibraryDisplay() {
@@ -134,4 +162,5 @@ function cardDelete(e) {
     e.target.parentElement.remove();
 
     console.log(myLibrary);
+    saveMyLibraryToStorage()
 }
