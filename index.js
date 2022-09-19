@@ -7,9 +7,13 @@ const updateFormElement = document.getElementById('update-form');
 updateFormElement.addEventListener('submit', updateSubmit)
 
 // close modal if target != modal content
-document.addEventListener('pointerup', function (e) {
+document.addEventListener('pointerdown', function (e) {
     const modal = document.getElementById('modal');
-    if (e.target == modal) modal.style.display = "none";
+    const modalFieldset = document.getElementById('update-book');
+    if (e.target == modal) {
+        modal.classList.remove('displayed');
+        modalFieldset.classList.remove('displayed');
+    }
 })
 
 function updateSubmit(e) {
@@ -87,19 +91,31 @@ function createCardElement(currentCard, key, comment) {
 }
 
 function createCardSettings() {
-    const settingsButton = document.createElement('button');
+    const settingsButton = document.createElement('img');
+    settingsButton.src = './svg/settings.svg';
     settingsButton.classList.add('settings-button');
     settingsButton.addEventListener('pointerup', displaySettingsModal)
 
     return settingsButton;
 }
 
+function createCardDelete() {
+    const deleteButton = document.createElement('img');
+    deleteButton.src = './svg/delete.svg';
+    deleteButton.classList.add('delete-button');
+    deleteButton.addEventListener('pointerup', cardDelete);
+
+    return deleteButton;
+}
+
 function displaySettingsModal(e) {
     const currentLibraryIndex = myLibrary.filter(obj => obj.id === e.target.parentElement.attributes[0].value)[0];
     const modal = document.getElementById('modal');
+    const modalFieldset = document.getElementById('update-book');
     const updateForm = document.getElementById('update-form');
 
-    modal.style.display = 'flex';
+    modal.classList.add('displayed');
+    modalFieldset.classList.add('displayed');
 
     console.log(`%cCurrent UUID: ${e.target.parentElement.attributes[0].value}`, 'color: lightgreen');
 
@@ -108,14 +124,6 @@ function displaySettingsModal(e) {
     updateForm[2].value = currentLibraryIndex.author;
     updateForm[3].value = currentLibraryIndex.pages;
     updateForm[4].checked = currentLibraryIndex.isFinished;
-}
-
-function createCardDelete() {
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-button');
-    deleteButton.addEventListener('pointerup', cardDelete);
-
-    return deleteButton;
 }
 
 function cardDelete(e) {
