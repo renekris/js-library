@@ -20,6 +20,8 @@ function updateSubmit(e) {
     myLibrary[currentIndex].author = e.target[2].value;
     myLibrary[currentIndex].pages = e.target[3].value;
     myLibrary[currentIndex].isFinished = e.target[4].checked;
+
+    updateLibraryDisplay()
 }
 
 function Book(book) {
@@ -45,50 +47,50 @@ function formSubmit(e) {
     addCard();
 }
 
-function updateBookDisplay() { // for persistent storage
-    for (let i = 0; i < myLibrary.length; i++) {
-        const libraryDisplay = document.getElementById('library');
-        const book = myLibrary[i];
+function updateLibraryDisplay() {
+    const cardLibrary = document.getElementById('library');
+    cardLibrary.innerHTML = '';
+
+    myLibrary.forEach(element => {
         const bookCard = document.createElement('div');
+        bookCard.dataset.uuid = element.id;
 
-        bookCard.append(document.createElement('p').textContent = book.name);
-        bookCard.append(document.createElement('p').textContent = book.author);
-        bookCard.append(document.createElement('p').textContent = book.pages);
-        bookCard.append(document.createElement('p').textContent = book.isFinished);
+        bookCard.append(createCardElement(element, 'name'));
+        bookCard.append(createCardElement(element, 'author'));
+        bookCard.append(createCardElement(element, 'pages'));
+        bookCard.append(createCardElement(element, 'isFinished'));
 
+        bookCard.append(createCardDelete());
+        bookCard.append(createCardSettings());
 
-        libraryDisplay.append(bookCard);
-    }
+        cardLibrary.append(bookCard);
+    });
 }
 
-// updateBookDisplay();
-
 function addCard() {
-    const libraryDisplay = document.getElementById('library');
+    const cardLibrary = document.getElementById('library');
     const bookCard = document.createElement('div');
-    const currentBook = myLibrary[myLibrary.length - 1];
+    const currentCard = myLibrary[myLibrary.length - 1];
 
-    bookCard.dataset.number = currentBook['id'];
+    bookCard.dataset.uuid = currentCard.id;
 
-    console.log(currentBook['id']);
+    console.log(currentCard.id);
 
-    bookCard.append(createCardElement('name'));
-    bookCard.append(createCardElement('author'));
-    bookCard.append(createCardElement('pages'));
-    bookCard.append(createCardElement('isFinished'));
+    bookCard.append(createCardElement(currentCard, 'name'));
+    bookCard.append(createCardElement(currentCard, 'author'));
+    bookCard.append(createCardElement(currentCard, 'pages'));
+    bookCard.append(createCardElement(currentCard, 'isFinished'));
 
 
     bookCard.append(createCardDelete());
     bookCard.append(createCardSettings());
 
-    libraryDisplay.append(bookCard);
+    cardLibrary.append(bookCard);
 }
 
-function createCardElement(key) {
-    const currentBook = myLibrary[myLibrary.length - 1];
-
+function createCardElement(currentCard, key) {
     const cardElement = document.createElement('p');
-    cardElement.textContent = currentBook[key];
+    cardElement.textContent = currentCard[key];
     cardElement.classList.add(`card-${key}`);
 
     return cardElement;
@@ -127,7 +129,7 @@ function createCardDelete() {
 }
 
 function cardDelete(e) {
-    const currentIndex = myLibrary.findIndex(obj => obj.id === e.target.parentElement.dataset.number);
+    const currentIndex = myLibrary.findIndex(obj => obj.id === e.target.parentElement.dataset.uuid);
 
     if (currentIndex <= -1) return
     myLibrary.splice(currentIndex, 1);
