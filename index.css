@@ -22,7 +22,7 @@
 /* Modal */
 
 #modal {
-    display: flex; /* default none, debugging flex */
+    display: none; /* default none, debugging flex */
     position: fixed;
     z-index: 100;
     left: 0;
@@ -35,6 +35,7 @@
 #modal .settings-modal-content {
     margin: auto;
     padding: 1rem;
+    min-width: 25%;
 
     background-color: white;
 }
