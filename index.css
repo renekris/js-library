@@ -84,12 +84,12 @@ button[type="submit"] {
     transition-property: color;
 }
 
-button[type="submit"]:focus,
-button[type="submit"]:hover {
+button[type="submit"]:active {
+    transition-duration: 0.01;
     color: var(--palettes-3);
 }
 
-button[type="submit"]:focus:after,
+button[type="submit"]:active:after,
 button[type="submit"]:hover:after {
     width: 100%;
     left: 0%;
@@ -203,7 +203,7 @@ button[type="submit"]:after {
 #library {
     margin: 1rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
     width: 80%;
 }
