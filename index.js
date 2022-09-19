@@ -51,43 +51,31 @@ function updateLibraryDisplay() {
     const cardLibrary = document.getElementById('library');
     cardLibrary.innerHTML = '';
 
-    myLibrary.forEach(element => {
-        const bookCard = document.createElement('div');
-        bookCard.dataset.uuid = element.id;
-        if (element.isFinished) bookCard.classList.add('finished');
-
-        bookCard.append(createCardElement(element, 'name', 'Name:'));
-        bookCard.append(createCardElement(element, 'author', 'Author:'));
-        bookCard.append(createCardElement(element, 'pages', 'Pages:'));
-        // bookCard.append(createCardElement(element, 'isFinished'));
-
-        bookCard.append(createCardSettings());
-        bookCard.append(createCardDelete());
-
-        cardLibrary.append(bookCard);
+    myLibrary.forEach(cardObj => {
+        createCard(cardObj);
     });
 }
 
 function addCard() {
-    const cardLibrary = document.getElementById('library');
-    const bookCard = document.createElement('div');
     const currentCard = myLibrary[myLibrary.length - 1];
+    createCard(currentCard);
+}
 
-    bookCard.dataset.uuid = currentCard.id;
-    if (currentCard.isFinished) bookCard.classList.add('finished');
+function createCard(currentCardObj) {
+    const cardLibrary = document.getElementById('library');
+    const card = document.createElement('div');
 
-    console.log(currentCard.id);
+    card.dataset.uuid = currentCardObj.id;
+    if (currentCardObj.isFinished) card.classList.add('finished');
 
-    bookCard.append(createCardElement(currentCard, 'name', 'Name:'));
-    bookCard.append(createCardElement(currentCard, 'author', 'Author:'));
-    bookCard.append(createCardElement(currentCard, 'pages', 'Pages:'));
-    // bookCard.append(createCardElement(currentCard, 'isFinished'));
+    card.append(createCardElement(currentCardObj, 'name', 'Name:'));
+    card.append(createCardElement(currentCardObj, 'author', 'Author:'));
+    card.append(createCardElement(currentCardObj, 'pages', 'Pages:'));
 
+    card.append(createCardSettings());
+    card.append(createCardDelete());
 
-    bookCard.append(createCardSettings());
-    bookCard.append(createCardDelete());
-
-    cardLibrary.append(bookCard);
+    cardLibrary.append(card);
 }
 
 function createCardElement(currentCard, key, comment) {

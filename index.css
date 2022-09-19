@@ -162,6 +162,7 @@ button:after {
 .add-book {
     width: 80%;
     height: fit-content;
+    box-shadow: 0 0 15px 2px var(--palettes-1);
 }
 
 #book-form {
@@ -211,16 +212,8 @@ button:after {
 }
 
 #library div.finished::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 1rem;
-
     background-color: var(--palettes-5);
     box-shadow: -10px 0 25px 12px var(--palettes-5);
-    clip-path: inset(0 -50px 0 0);
 }
 
 #library .delete-button {
