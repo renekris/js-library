@@ -100,9 +100,10 @@ function createCard(currentCardObj) {
     card.dataset.uuid = currentCardObj.id;
     if (currentCardObj.isFinished) card.classList.add('finished');
 
-    card.append(createCardElement(currentCardObj, 'name', 'Name:'));
-    card.append(createCardElement(currentCardObj, 'author', 'Author:'));
-    card.append(createCardElement(currentCardObj, 'pages', 'Pages:'));
+    card.append(createCardComment('name', 'Name:'), createCardElement(currentCardObj, 'name'))
+    card.append(createCardComment('author', 'Author:'), createCardElement(currentCardObj, 'author'))
+    card.append(createCardComment('pages', 'Pages:'), createCardElement(currentCardObj, 'pages'))
+
 
     card.append(createCardSettings());
     card.append(createCardDelete());
@@ -110,12 +111,21 @@ function createCard(currentCardObj) {
     cardLibrary.append(card);
 }
 
-function createCardElement(currentCard, key, comment) {
+function createCardElement(currentCard, key) {
     const cardElement = document.createElement('p');
-    cardElement.textContent = `${comment} ${currentCard[key]}`;
+    cardElement.textContent = `${currentCard[key]}`;
     cardElement.classList.add(`card-${key}`);
 
     return cardElement;
+}
+
+function createCardComment(key, comment) {
+    const cardElementComment = document.createElement('p');
+
+    cardElementComment.textContent = `${comment}`;
+    cardElementComment.classList.add(`card-${key}`);
+
+    return cardElementComment;
 }
 
 function createCardSettings() {
