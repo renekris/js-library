@@ -55,26 +55,26 @@ function updateSubmit(e) {
     hideModal();
 }
 
-function Book(book) {
-    Object.assign(this, book);
-}
-
-function setNewLibraryValues(e) {
-    const book = {};
-
-    book.id = crypto.randomUUID();
-    book.name = e.target[0].value || '-';
-    book.author = e.target[1].value || '-';
-    book.pages = e.target[2].value || '-';
-    book.isFinished = e.target[3].checked; //default = false
-
-    return book;
+class Book {
+    constructor(id, name, author, pages, isFinished) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.isFinished = isFinished;
+    }
 }
 
 function formSubmit(e) {
-    const book = setNewLibraryValues(e);
+    const book = new Book(
+        crypto.randomUUID(),
+        e.target[0].value || '-',
+        e.target[1].value || '-',
+        e.target[2].value || '-',
+        e.target[3].checked,
+    );
 
-    myLibrary.push(new Book(book));
+    myLibrary.push(book);
     addCard();
     saveMyLibraryToStorage();
 }
