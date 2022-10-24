@@ -21,6 +21,8 @@
                                 type="text"
                                 name="name"
                                 id="update-name"
+                                placeholder="Title of the Book"
+                                required
                             />
                         </label>
                         <label for="update-author">
@@ -28,6 +30,7 @@
                             <input
                                 type="text"
                                 name="author"
+                                placeholder="John Doe"
                                 id="update-author"
                             />
                         </label>
@@ -37,6 +40,7 @@
                                 type="number"
                                 name="pages"
                                 id="update-pages"
+                                placeholder="###"
                             />
                         </label>
                         <label for="update-status">
@@ -64,8 +68,9 @@
                             type="text"
                             name="name"
                             id="book-name"
-                            placeholder="n"
-                            value="人間失格"
+                            placeholder="Title of the Book"
+                            value=""
+                            required
                         />
                     </label>
                     <label for="book-author">
@@ -74,8 +79,8 @@
                             type="text"
                             name="author"
                             id="book-author"
-                            placeholder="John Doe"
-                            value="太宰 治"
+                            placeholder="Renekris"
+                            value=""
                         />
                     </label>
                     <label for="book-pages">
@@ -85,7 +90,8 @@
                             name="pages"
                             id="book-pages"
                             placeholder="###"
-                            value="205"
+                            value=""
+                            min="0"
                         />
                     </label>
                     <label for="book-status">

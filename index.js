@@ -4,12 +4,15 @@ const bookFormElement = document.getElementById('book-form');
 bookFormElement.addEventListener('submit', formSubmit);
 
 const updateFormElement = document.getElementById('update-form');
-updateFormElement.addEventListener('submit', updateSubmit)
+updateFormElement.addEventListener('submit', updateSubmit);
 
 retrieveMyLibraryFromStorage();
 
 // close modal if target != modal content
-document.addEventListener('pointerdown', hideModal)
+document.addEventListener('pointerdown', hideModal);
+
+// FORM VALIDATION
+
 
 // local storage
 function saveMyLibraryToStorage() {
